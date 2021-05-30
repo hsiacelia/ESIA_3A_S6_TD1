@@ -19,6 +19,10 @@ import retrofit2.Response
 class PokemonDetailFragment : Fragment() {
 
     private lateinit var textViewName: TextView
+    private lateinit var textViewHeight: TextView
+    private lateinit var textViewWeight: TextView
+//    private lateinit var textViewType: TextView
+
 
 
     override fun onCreateView(
@@ -37,6 +41,10 @@ class PokemonDetailFragment : Fragment() {
 //        }
 
         textViewName = view.findViewById(R.id.pokemon_detail_name)
+        textViewHeight = view.findViewById(R.id.pokemon_detail_height)
+        textViewWeight = view.findViewById(R.id.pokemon_detail_weight)
+//        textViewType = view.findViewById(R.id.pokemon_detail_type)
+
         callApi()
 
     }
@@ -50,7 +58,11 @@ class PokemonDetailFragment : Fragment() {
 
             override fun onResponse( call: Call<PokemonDetailResponse>, response: Response<PokemonDetailResponse>) {
                 if(response.isSuccessful && response.body() != null){
-                    textViewName.text = response.body()!!.name
+                    textViewName.text = "Name : " + response.body()!!.name
+                    textViewHeight.text = "Height : " +  response.body()!!.height.toString()
+                    textViewWeight.text = "Weight : " +  response.body()!!.weight.toString()
+//                    textViewType.text = "Type : " +  response.body()!!.type.elementAt(1).type.name
+
                 }
             }
         })
